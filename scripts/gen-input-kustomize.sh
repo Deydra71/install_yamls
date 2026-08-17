@@ -37,7 +37,7 @@ if [ -z "$HEAT_AUTH_ENCRYPTION_KEY" ]; then
 fi
 
 if [ -z "$BARBICAN_SIMPLE_CRYPTO_ENCRYPTION_KEY" ]; then
-    echo "Please set BARBICAN_SIMPLE_CRYPTO_ENCRYPTION_KEY"; exit 1
+    BARBICAN_SIMPLE_CRYPTO_ENCRYPTION_KEY="$(python3 -c 'from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())')"
 fi
 
 if [ -z "$KEYSTONE_FEDERATION_CLIENT_SECRET" ]; then

@@ -66,6 +66,10 @@ ifeq ($(REDHAT_OPERATORS), true)
 	OPERATOR_SOURCE_NAMESPACE	?= openshift-marketplace
 endif
 
+# Barbican encryption key must be a unique Fernet key per cluster.
+# When unset, gen-input-kustomize.sh generates one at deploy time.
+# Example manual generation: python3 -c 'from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())'
+
 # Allows overriding the cleanup command used in *_cleanup targets.
 # Useful in CI, to allow injectin kustomization in each operator CR directory
 # before the resource gets deployed. If it's not possible to inject Kustomizations/CRs
